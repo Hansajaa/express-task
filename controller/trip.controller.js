@@ -1,6 +1,6 @@
 const tripRepository = require('../repository/trip.repository');
 
-
+// Create Trip
 function createTrip(newTrip,callBack){
 
     tripRepository.createTrip(newTrip,(isSaved)=>{
@@ -9,4 +9,14 @@ function createTrip(newTrip,callBack){
 
 }
 
-module.exports.createTrip = createTrip;
+// Get trips by user and category ids
+function getTripsByUserAndCategoryIds(userId,categoryId,callBack){
+    tripRepository.getTripsByIds(userId,categoryId,(data)=>{
+        callBack(data);
+    })
+}
+
+module.exports = {
+    createTrip:createTrip,
+    getTripsByUserAndCategoryIds:getTripsByUserAndCategoryIds
+}

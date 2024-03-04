@@ -1,6 +1,6 @@
 const db = require('../config/dbconfig');
 
-
+// Create New Trip
 function createTrip(newTrip,callBack){
 
     let sql = `INSERT into trip VALUES(?,?,?,?,?,?)`;
@@ -18,4 +18,20 @@ function createTrip(newTrip,callBack){
     })
 }
 
-module.exports.createTrip = createTrip;
+
+// Get trips by user and category ids
+function getTripsByIds(userId,categoryId,callBack){
+
+    let sql = `SELECT * FROM trip WHERE USER_ID=${userId} AND CATEGORY_ID=${categoryId}`;
+
+    db.query(sql,(err,data,fields)=>{
+        if(err) throw err;
+
+        callBack(data);
+    })
+}
+
+module.exports = {
+    createTrip:createTrip,
+    getTripsByIds:getTripsByIds
+}

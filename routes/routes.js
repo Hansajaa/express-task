@@ -32,7 +32,7 @@ router.get("/user/:id",(req,res)=>{
     
 })
 
-
+// Create New Trip
 router.post("/trip/create",(req, res)=>{
     
     const trip = req.body;
@@ -48,6 +48,26 @@ router.post("/trip/create",(req, res)=>{
     });
 })
 
+// Get trips by user and category ids
+router.get("/trip/:userId/:categoryId",(req,res)=>{
+
+    let userId = req.params.userId;
+    let categoryId = req.params.categoryId;
+
+    tripController.getTripsByUserAndCategoryIds(userId,categoryId,(data)=>{
+        res.json({
+            status:200,
+            message: `Trips fetched for user ${userId}, category ${categoryId}`,
+            category:{
+                id:categoryId
+            },
+            user:{
+                id:userId
+            },
+            trips:data
+        })
+    })
+})
 
 
 module.exports = router;
