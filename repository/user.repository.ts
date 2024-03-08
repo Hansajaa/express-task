@@ -10,3 +10,4 @@ export function getUserById(id:any,callBack:any){
         callBack(data)
     })
 }
+
